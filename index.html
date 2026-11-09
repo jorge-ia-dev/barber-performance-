@@ -1,16 +1,9 @@
 
 <!DOCTYPE html>
-<tr>
-  <th>Mês</th>
-  <th>Atendimentos</th>
-  <th>Bruto</th>
-  <th>Líquido</th>
-  <th>Comissão</th>
-</tr>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#090b0a">
 <title>Barber Performance</title>
 
@@ -19,77 +12,106 @@
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+:root {
+  --bg: #090b0a;
+  --panel: #111512;
+  --panel2: #171d19;
+  --green: #a5ff75;
+  --text: #f2f5f1;
+  --muted: #89948c;
+  --border: #263129;
+  --red: #ff7373;
+}
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  padding: 18px;
-  background: #090b0a;
-  color: #f5f5f5;
+  padding: 20px 14px 45px;
+  background: var(--bg);
+  color: var(--text);
   font-family: 'Rajdhani', sans-serif;
-  font-size: 18px;
-}
-
-h1, h2, h3, button, .resultado {
-  font-family: 'Orbitron', sans-serif;
-}
-
-h1 {
-  color: #a5ff75;
-  font-size: 24px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 15px #a5ff7540;
-}
-
-h3 {
-  color: #a5ff75;
-  font-size: 14px;
-  letter-spacing: 1px;
-}
-
-p {
-  margin: 10px 0;
-}
-
-.card {
-  background: #171b19;
-  padding: 18px;
-  border: 1px solid #292f2b;
-  border-radius: 16px;
-  margin: 17px 0;
-  box-shadow: 0 5px 20px #00000035;
-}
-
-input, select, button {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border-radius: 9px;
   font-size: 17px;
 }
 
+.container {
+  max-width: 950px;
+  margin: auto;
+}
+
+header {
+  padding: 20px 4px 25px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 22px;
+}
+
+.logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--green);
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 7px;
+  font-size: 15px;
+  letter-spacing: 1px;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  margin: 0 0 18px;
+}
+
+section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 19px;
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  color: var(--muted);
+  margin: 12px 0 5px;
+  font-weight: 600;
+}
+
 input, select {
-  background: #222824;
-  color: white;
-  border: 1px solid #383e3a;
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: #090d0a;
+  color: var(--text);
   font-family: 'Rajdhani', sans-serif;
+  font-size: 17px;
+  outline: none;
 }
 
 input:focus, select:focus {
-  outline: none;
-  border-color: #a5ff75;
-  box-shadow: 0 0 8px #a5ff7530;
+  border-color: var(--green);
 }
 
 button {
-  background: #a5ff75;
-  color: #101510;
+  border: none;
+  border-radius: 8px;
+  padding: 13px 17px;
+  background: var(--green);
+  color: #10170d;
+  font-family: 'Orbitron', sans-serif;
   font-size: 11px;
-  font-weight: bold;
-  letter-spacing: 1px;
-  border: 0;
+  font-weight: 700;
   cursor: pointer;
 }
 
@@ -97,262 +119,392 @@ button:active {
   transform: scale(.98);
 }
 
-small {
-  color: #a5ff75;
+.primary {
+  width: 100%;
+  margin-top: 18px;
 }
 
-label {
+.secondary {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.delete {
+  background: #351919;
+  color: #ffaaaa;
+  padding: 8px 11px;
+  font-size: 10px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 11px;
+}
+
+.metric {
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 14px;
+  min-width: 0;
+}
+
+.metric small {
   display: block;
-  margin-top: 12px;
-  color: #c4cec7;
-  font-weight: 600;
+  color: var(--muted);
+  font-size: 13px;
+  margin-bottom: 7px;
 }
 
-.resultado {
-  font-size: 22px;
-  font-weight: bold;
-  margin-top: 8px;
-  color: #a5ff75;
+.metric strong {
+  display: block;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 17px;
+  color: var(--green);
   overflow-wrap: anywhere;
 }
 
-.subtitulo {
-  color: #89948d;
-  font-size: 15px;
-  letter-spacing: 1px;
+.metric .neutral {
+  color: var(--text);
 }
 
-.item {
-  border-bottom: 1px solid #383e3a;
-  padding: 14px 0;
-  line-height: 1.6;
-}
-
-#mensagem {
-  color: #a5ff75;
-  font-weight: bold;
-}
-
-.grafico-mes {
-  margin: 13px 0;
-  padding: 12px;
-  background: #111512;
-  border-radius: 12px;
-}
-
-.mes-titulo {
-  color: #a5ff75;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.linha-grafico {
+.controls {
   display: flex;
-  align-items: center;
   gap: 7px;
-  margin: 9px 0;
-  font-size: 13px;
+  flex-wrap: wrap;
+  margin-bottom: 15px;
 }
 
-.linha-grafico span:first-child {
-  width: 48px;
-  color: #c4cec7;
-}
-
-.barra-fundo {
+.controls button {
   flex: 1;
-  height: 10px;
-  background: #292f2b;
-  border-radius: 10px;
-  overflow: hidden;
+  min-width: 65px;
 }
 
-.barra {
-  height: 100%;
-  border-radius: 10px;
-  background: #a5ff75;
+.controls button.active {
+  background: var(--green);
+  color: #10170d;
 }
 
-.barra.liquida {
-  background: #53b9ff;
+.chart {
+  display: flex;
+  align-items: end;
+  gap: 9px;
+  min-height: 170px;
+  padding: 12px 3px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.valor-grafico {
-  width: 78px;
-  text-align: right;
+.bar-group {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+}
+
+.bar-area {
+  height: 125px;
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 3px;
+}
+
+.bar {
+  width: 42%;
+  min-height: 2px;
+  border-radius: 5px 5px 0 0;
+}
+
+.bar.gross {
+  background: #526b50;
+}
+
+.bar.net {
+  background: var(--green);
+}
+
+.bar-label {
+  display: block;
   font-size: 12px;
+  color: var(--muted);
+  margin-top: 7px;
 }
 
-.tabela-meses {
-  overflow-x: auto;
-}
-
-.tabela-meses table {
-  width: 100%;
-  min-width: 510px;
-  border-collapse: collapse;
-  font-size: 15px;
-}
-
-.tabela-meses th,
-.tabela-meses td {
-  padding: 10px 7px;
-  text-align: left;
-  border-bottom: 1px solid #383e3a;
-}
-
-.tabela-meses th {
-  color: #a5ff75;
-}
-
-.legenda {
+.legend {
   display: flex;
   gap: 15px;
   flex-wrap: wrap;
-  color: #aeb8b1;
-  font-size: 14px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: var(--muted);
 }
 
-.ponto {
+.dot {
   display: inline-block;
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   margin-right: 5px;
 }
 
-.verde {
-  background: #a5ff75;
+.month-bars {
+  display: flex;
+  align-items: end;
+  gap: 8px;
+  min-height: 155px;
+  overflow-x: auto;
+  padding: 10px 2px 0;
+  border-bottom: 1px solid var(--border);
 }
 
-.azul {
-  background: #53b9ff;
+.month-column {
+  flex: 1;
+  min-width: 35px;
+  text-align: center;
 }
 
+.month-column .bar-area {
+  height: 110px;
+}
+
+.month-column .bar {
+  width: 65%;
+}
+
+.month-column small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 470px;
+  font-size: 14px;
+}
+
+th, td {
+  padding: 11px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+td {
+  color: var(--text);
+}
+
+.highlight {
+  color: var(--green);
+  font-weight: 700;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-info {
+  min-width: 0;
+}
+
+.history-info strong {
+  display: block;
+}
+
+.history-info small {
+  color: var(--muted);
+  display: block;
+  margin-top: 3px;
+}
+
+.history-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.history-right strong {
+  color: var(--green);
+  display: block;
+}
+
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 18px 5px;
+}
+
+.message {
+  color: var(--green);
+  margin-top: 12px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+@media (min-width: 650px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  body {
+    padding-top: 35px;
+  }
+}
 </style>
 </head>
 
 <body>
+<div class="container">
 
-<h1>BARBER PERFORMANCE</h1>
-<p class="subtitulo">SEU DESEMPENHO. SEUS RESULTADOS.</p>
+<header>
+  <div class="logo">BARBER <span>PERFORMANCE</span></div>
+  <div class="subtitle">GESTÃO • RESULTADOS • EVOLUÇÃO</div>
+</header>
 
-<div class="card">
-<h3>NOVO ATENDIMENTO</h3>
+<section>
+  <h2>NOVO ATENDIMENTO</h2>
 
-<label>Data</label>
-<input type="date" id="data">
+  <label for="data">Data do atendimento</label>
+  <input type="date" id="data">
 
-<label>Serviço</label>
-<select id="servico">
-  <option value="cabelo">Cabelo</option>
-  <option value="barba">Barba</option>
-  <option value="ambos">Cabelo + Barba</option>
-</select>
+  <label for="servico">Serviço realizado</label>
+  <select id="servico" onchange="mostrarCampos()">
+    <option value="cabelo">Cabelo</option>
+    <option value="barba">Barba</option>
+    <option value="ambos">Cabelo + Barba</option>
+  </select>
 
-<label>Valor do cabelo (R$)</label>
-<input type="number" id="cabelo" value="35" min="0" step="0.01">
+  <div id="campoCabelo">
+    <label for="cabelo">Valor do cabelo (R$)</label>
+    <input type="number" id="cabelo" min="0" step="0.01" placeholder="Ex.: 35,00">
+  </div>
 
-<label>Valor da barba (R$)</label>
-<input type="number" id="barba" value="25" min="0" step="0.01">
+  <div id="campoBarba" style="display:none">
+    <label for="barba">Valor da barba (R$)</label>
+    <input type="number" id="barba" min="0" step="0.01" placeholder="Ex.: 25,00">
+  </div>
 
-<label>Desconto total (R$)</label>
-<input type="number" id="desconto" value="0" min="0" step="0.01">
+  <label for="desconto">Desconto concedido (R$)</label>
+  <input type="number" id="desconto" min="0" step="0.01" value="0">
 
-<button onclick="salvar()">SALVAR ATENDIMENTO</button>
-<p id="mensagem"></p>
-</div>
+  <button class="primary" onclick="salvar()">SALVAR ATENDIMENTO</button>
+  <div id="mensagem" class="message"></div>
 
-<div class="card">
-<h3>SEU PAINEL</h3>
+  <div class="note">Sua comissão é calculada automaticamente em 50% sobre o valor após o desconto.</div>
+</section>
 
-<label>Período</label>
-<select id="periodo" onchange="atualizar()">
-  <option value="7">Últimos 7 dias</option>
-  <option value="15">Últimos 15 dias</option>
-  <option value="30" selected>Últimos 30 dias</option>
-</select>
+<section>
+  <h2>DESEMPENHO</h2>
 
-<p>Atendimentos</p>
-<div class="resultado" id="totalAtendimentos">0</div>
+  <div class="controls">
+    <button class="secondary active" id="btn7" onclick="mudarPeriodo(7)">7 DIAS</button>
+    <button class="secondary" id="btn15" onclick="mudarPeriodo(15)">15 DIAS</button>
+    <button class="secondary" id="btn30" onclick="mudarPeriodo(30)">30 DIAS</button>
+  </div>
 
-<p>Faturamento líquido</p>
-<div class="resultado" id="faturamento">R$ 0,00</div>
+  <div class="grid">
+    <div class="metric">
+      <small>Atendimentos</small>
+      <strong id="totalAtendimentos">0</strong>
+    </div>
+    <div class="metric">
+      <small>Faturamento bruto</small>
+      <strong id="totalBruto">R$ 0,00</strong>
+    </div>
+    <div class="metric">
+      <small>Faturamento líquido</small>
+      <strong id="totalLiquido">R$ 0,00</strong>
+    </div>
+    <div class="metric">
+      <small>Minha comissão</small>
+      <strong id="totalComissao">R$ 0,00</strong>
+    </div>
+  </div>
+</section>
 
-<p>Sua comissão (50%)</p>
-<div class="resultado" id="comissao">R$ 0,00</div>
-</div>
+<section>
+  <h2>EVOLUÇÃO SEMANAL</h2>
+  <div class="chart" id="graficoSemanal"></div>
+  <div class="legend">
+    <span><i class="dot" style="background:#526b50"></i>Bruto</span>
+    <span><i class="dot" style="background:#a5ff75"></i>Líquido</span>
+  </div>
+</section>
 
-<div class="card">
-<h3>GRÁFICO DOS ÚLTIMOS 7 DIAS</h3>
-<p class="subtitulo">EVOLUÇÃO DIÁRIA DO FATURAMENTO</p>
-<div id="graficoSemanal"></div>
-<div class="legenda">
-  <span><i class="ponto verde"></i>Bruto</span>
-  <span><i class="ponto azul"></i>Líquido</span>
-</div>
-</div>
+<section>
+  <h2>EVOLUÇÃO MENSAL</h2>
+  <div class="note" id="periodoMensal"></div>
+  <div class="month-bars" id="graficoMensal"></div>
+  <div class="legend">
+    <span><i class="dot" style="background:#a5ff75"></i>Faturamento líquido</span>
+  </div>
+</section>
 
-<div class="card">
-<h3>GRÁFICO DE EVOLUÇÃO MENSAL</h3>
-<p class="subtitulo">BRUTO X LÍQUIDO — ÚLTIMOS 6 MESES</p>
-<div id="graficoMensal"></div>
-<div class="legenda">
-  <span><i class="ponto verde"></i>Bruto</span>
-  <span><i class="ponto azul"></i>Líquido</span>
-</div>
-</div>
+<section>
+  <h2>RESULTADOS POR MÊS</h2>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Mês</th>
+          <th>Atendimentos</th>
+          <th>Bruto</th>
+          <th>Líquido</th>
+          <th>Comissão</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaMensal"></tbody>
+    </table>
+  </div>
+  <div class="note">Cada atendimento conta como um registro. Cabelo + barba no mesmo cadastro conta como um único atendimento.</div>
+</section>
 
-<div class="card">
-<h3>DESEMPENHO MÊS A MÊS</h3>
-<p class="subtitulo">ACOMPANHE SUA EVOLUÇÃO FINANCEIRA</p>
+<section>
+  <h2>HISTÓRICO DE ATENDIMENTOS</h2>
+  <div id="historico"></div>
+</section>
 
-<div class="tabela-meses">
-<table>
-<thead>
-<tr>
-  <th>Mês</th>
-  <th>Bruto</th>
-  <th>Descontos</th>
-  <th>Líquido</th>
-  <th>Comissão</th>
-  <th>Atend.</th>
-</tr>
-</thead>
-<tbody id="tabelaMensal"></tbody>
-</table>
-</div>
-</div>
-
-<div class="card">
-<h3>HISTÓRICO DE ATENDIMENTOS</h3>
-<div id="historico">Nenhum atendimento registrado.</div>
 </div>
 
 <script>
 const chave = "barber_performance_v1";
 
 let registros = [];
+let periodo = 7;
 
 try {
   registros = JSON.parse(localStorage.getItem(chave) || "[]");
-
-  if (!Array.isArray(registros)) {
-    registros = [];
-  }
-} catch(e) {
+  if (!Array.isArray(registros)) registros = [];
+} catch (e) {
   registros = [];
 }
-
-function dataLocal(d = new Date()) {
-  const ano = d.getFullYear();
-  const mes = String(d.getMonth() + 1).padStart(2, "0");
-  const dia = String(d.getDate()).padStart(2, "0");
-
-  return `${ano}-${mes}-${dia}`;
-}
-
-document.getElementById("data").value = dataLocal();
 
 function dinheiro(valor) {
   return Number(valor || 0).toLocaleString("pt-BR", {
@@ -361,31 +513,49 @@ function dinheiro(valor) {
   });
 }
 
+function dataLocal(date) {
+  const ano = date.getFullYear();
+  const mes = String(date.getMonth() + 1).padStart(2, "0");
+  const dia = String(date.getDate()).padStart(2, "0");
+  return `${ano}-${mes}-${dia}`;
+}
+
 function valorBruto(r) {
   return Number(r.cabelo || 0) + Number(r.barba || 0);
 }
 
 function valorLiquido(r) {
-  return Number(
-    r.liquido ?? (valorBruto(r) - Number(r.desconto || 0))
-  );
+  if (r.liquido !== undefined && r.liquido !== null) {
+    return Number(r.liquido);
+  }
+  return valorBruto(r) - Number(r.desconto || 0);
+}
+
+function valorComissao(r) {
+  if (r.comissao !== undefined && r.comissao !== null) {
+    return Number(r.comissao);
+  }
+  return valorLiquido(r) * 0.5;
+}
+
+function mostrarCampos() {
+  const servico = document.getElementById("servico").value;
+  const cabelo = document.getElementById("campoCabelo");
+  const barba = document.getElementById("campoBarba");
+
+  cabelo.style.display = servico === "barba" ? "none" : "block";
+  barba.style.display = servico === "cabelo" ? "none" : "block";
 }
 
 function salvar() {
   const data = document.getElementById("data").value;
   const servico = document.getElementById("servico").value;
-
-  const valorCabelo =
-    Number(document.getElementById("cabelo").value) || 0;
-
-  const valorBarba =
-    Number(document.getElementById("barba").value) || 0;
-
-  const desconto =
-    Number(document.getElementById("desconto").value) || 0;
+  const valorCabelo = Number(document.getElementById("cabelo").value) || 0;
+  const valorBarba = Number(document.getElementById("barba").value) || 0;
+  const desconto = Number(document.getElementById("desconto").value) || 0;
 
   if (!data) {
-    alert("Informe a data.");
+    alert("Informe a data do atendimento.");
     return;
   }
 
@@ -435,319 +605,218 @@ function salvar() {
 
   try {
     registros.push(atendimento);
-
-    localStorage.setItem(
-      chave,
-      JSON.stringify(registros)
-    );
+    localStorage.setItem(chave, JSON.stringify(registros));
 
     document.getElementById("mensagem").textContent =
       "Atendimento salvo com sucesso!";
 
-    document.getElementById("desconto").value = 0;
+    document.getElementById("cabelo").value = "";
+    document.getElementById("barba").value = "";
+    document.getElementById("desconto").value = "0";
 
     atualizar();
-
-  } catch(e) {
+  } catch (e) {
     registros = anteriores;
     alert("Não foi possível salvar. Verifique o armazenamento do navegador.");
   }
 }
 
-function atualizar() {
-  const dias = Number(
-    document.getElementById("periodo").value
-  );
+function mudarPeriodo(dias) {
+  periodo = dias;
 
-  const limite = new Date();
-  limite.setHours(0, 0, 0, 0);
-  limite.setDate(limite.getDate() - (dias - 1));
-
-  const agora = new Date();
-
-  const lista = registros.filter(r => {
-    if (!r.data) return false;
-
-    const partes = r.data.split("-").map(Number);
-    const d = new Date(partes[0], partes[1] - 1, partes[2]);
-
-    return d >= limite && d <= agora;
+  [7, 15, 30].forEach(n => {
+    document.getElementById("btn" + n).classList.toggle("active", n === dias);
   });
 
-  const bruto = lista.reduce(
-    (s, r) => s + valorBruto(r), 0
-  );
+  atualizar();
+}
 
-  const liquido = lista.reduce(
-    (s, r) => s + valorLiquido(r), 0
-  );
+function atualizar() {
+  const hoje = new Date();
+  const inicio = new Date(hoje);
+  inicio.setDate(hoje.getDate() - (periodo - 1));
+  inicio.setHours(0, 0, 0, 0);
 
-  const comissao = liquido * 0.5;
+  const fim = new Date(hoje);
+  fim.setHours(23, 59, 59, 999);
 
-  document.getElementById("totalAtendimentos").textContent =
-    lista.length;
+  const filtrados = registros.filter(r => {
+    const d = new Date(r.data + "T12:00:00");
+    return d >= inicio && d <= fim;
+  });
 
-  document.getElementById("faturamento").textContent =
-    dinheiro(liquido);
+  const bruto = filtrados.reduce((s, r) => s + valorBruto(r), 0);
+  const liquido = filtrados.reduce((s, r) => s + valorLiquido(r), 0);
+  const comissao = filtrados.reduce((s, r) => s + valorComissao(r), 0);
 
-  document.getElementById("comissao").textContent =
-    dinheiro(comissao);
+  document.getElementById("totalAtendimentos").textContent = filtrados.length;
+  document.getElementById("totalBruto").textContent = dinheiro(bruto);
+  document.getElementById("totalLiquido").textContent = dinheiro(liquido);
+  document.getElementById("totalComissao").textContent = dinheiro(comissao);
 
   atualizarGraficoSemanal();
   atualizarEvolucaoMensal();
   atualizarHistorico();
 }
 
-function atualizarHistorico() {
-  const historico = document.getElementById("historico");
-
-  if (!registros.length) {
-    historico.textContent = "Nenhum atendimento registrado.";
-    return;
-  }
-
-  historico.innerHTML = [...registros]
-    .sort((a, b) => b.data.localeCompare(a.data))
-    .map(r => {
-      const dataFormatada =
-        r.data.split("-").reverse().join("/");
-
-      const nomeServico =
-        r.servico === "ambos"
-          ? "Cabelo + Barba"
-          : r.servico === "cabelo"
-          ? "Cabelo"
-          : "Barba";
-
-      return `
-        <div class="item">
-          <strong>${dataFormatada}</strong><br>
-          Serviço: ${nomeServico}<br>
-          Bruto: ${dinheiro(valorBruto(r))}<br>
-          Desconto: ${dinheiro(r.desconto)}<br>
-          Líquido: ${dinheiro(valorLiquido(r))}<br>
-          Sua comissão: <small>${dinheiro(valorLiquido(r) * 0.5)}</small><br>
-          <button onclick="excluir(${Number(r.id)})">
-            EXCLUIR ATENDIMENTO
-          </button>
-        </div>
-      `;
-    }).join("");
-}
-
 function atualizarGraficoSemanal() {
-  const grafico = document.getElementById("graficoSemanal");
-
+  const hoje = new Date();
   const dias = [];
 
   for (let i = 6; i >= 0; i--) {
-    const d = new Date();
-    d.setHours(0, 0, 0, 0);
-    d.setDate(d.getDate() - i);
-
-    dias.push({
-      chave: dataLocal(d),
-      nome: d.toLocaleDateString("pt-BR", {
-        weekday: "short",
-        day: "2-digit"
-      })
-    });
+    const d = new Date(hoje);
+    d.setDate(hoje.getDate() - i);
+    dias.push(d);
   }
 
-  const dados = dias.map(dia => {
-    const lista = registros.filter(r => r.data === dia.chave);
+  const dados = dias.map(d => {
+    const chaveData = dataLocal(d);
+    const lista = registros.filter(r => r.data === chaveData);
 
     return {
-      ...dia,
+      dia: d.toLocaleDateString("pt-BR", { weekday: "short" }).replace(".", ""),
       bruto: lista.reduce((s, r) => s + valorBruto(r), 0),
       liquido: lista.reduce((s, r) => s + valorLiquido(r), 0)
     };
   });
 
-  const maior = Math.max(
-    1,
-    ...dados.flatMap(d => [d.bruto, d.liquido])
-  );
+  const maximo = Math.max(1, ...dados.map(d => d.bruto));
 
-  grafico.innerHTML = dados.map(d => {
-    const larguraBruto = d.bruto / maior * 100;
-    const larguraLiquido = d.liquido / maior * 100;
+  document.getElementById("graficoSemanal").innerHTML = dados.map(d => {
+    const alturaBruto = (d.bruto / maximo) * 100;
+    const alturaLiquido = (d.liquido / maximo) * 100;
 
     return `
-      <div class="grafico-mes">
-        <div class="mes-titulo">${d.nome}</div>
-
-        <div class="linha-grafico">
-          <span>Bruto</span>
-          <div class="barra-fundo">
-            <div class="barra" style="width:${larguraBruto}%"></div>
-          </div>
-          <div class="valor-grafico">${dinheiro(d.bruto)}</div>
+      <div class="bar-group">
+        <div class="bar-area">
+          <div class="bar gross" style="height:${alturaBruto}%"
+            title="Bruto: ${dinheiro(d.bruto)}"></div>
+          <div class="bar net" style="height:${alturaLiquido}%"
+            title="Líquido: ${dinheiro(d.liquido)}"></div>
         </div>
-
-        <div class="linha-grafico">
-          <span>Líquido</span>
-          <div class="barra-fundo">
-            <div class="barra liquida" style="width:${larguraLiquido}%"></div>
-          </div>
-          <div class="valor-grafico">${dinheiro(d.liquido)}</div>
-        </div>
+        <span class="bar-label">${d.dia}</span>
       </div>
     `;
   }).join("");
 }
 
+function nomeMes(mes) {
+  return [
+    "Jan", "Fev", "Mar", "Abr", "Mai", "Jun",
+    "Jul", "Ago", "Set", "Out", "Nov", "Dez"
+  ][mes];
+}
 
 function atualizarEvolucaoMensal() {
   const hoje = new Date();
   const anoAtual = hoje.getFullYear();
   const mesAtual = hoje.getMonth();
 
-  // Outubro inicia o ciclo de acompanhamento.
-  // Em janeiro, um novo ciclo começa automaticamente.
+  // De outubro a dezembro: inicia em outubro.
+  // A partir de janeiro: inicia um novo ciclo em janeiro.
   const mesInicial = mesAtual >= 9 ? 9 : 0;
 
-  const meses = {};
+  const meses = [];
 
-  registros.forEach(r => {
-    if (!r.data) return;
+  for (let m = mesInicial; m <= mesAtual; m++) {
+    const lista = registros.filter(r => {
+      const d = new Date(r.data + "T12:00:00");
+      return d.getFullYear() === anoAtual && d.getMonth() === m;
+    });
 
-    const partes = r.data.split("-").map(Number);
-    const ano = partes[0];
-    const mes = partes[1] - 1;
-
-    // Exibe somente o ano atual e o período do ciclo.
-    if (
-      ano !== anoAtual ||
-      mes < mesInicial ||
-      mes > mesAtual
-    ) return;
-
-    const chaveMes = r.data.slice(0, 7);
-    const bruto = valorBruto(r);
-    const liquido = valorLiquido(r);
-
-    if (!meses[chaveMes]) {
-      meses[chaveMes] = {
-        bruto: 0,
-        liquido: 0,
-        descontos: 0,
-        comissao: 0,
-        atendimentos: 0
-      };
-    }
-
-    meses[chaveMes].bruto += bruto;
-    meses[chaveMes].liquido += liquido;
-    meses[chaveMes].descontos += Number(r.desconto || 0);
-    meses[chaveMes].comissao += liquido * 0.5;
-    meses[chaveMes].atendimentos++;
-  });
-
-  function nomeMes(chave) {
-    const [ano, mes] = chave.split("-").map(Number);
-
-    return new Date(ano, mes - 1, 1)
-      .toLocaleDateString("pt-BR", {
-        month: "long",
-        year: "numeric"
-      });
+    meses.push({
+      mes: m,
+      atendimentos: lista.length,
+      bruto: lista.reduce((s, r) => s + valorBruto(r), 0),
+      liquido: lista.reduce((s, r) => s + valorLiquido(r), 0),
+      comissao: lista.reduce((s, r) => s + valorComissao(r), 0)
+    });
   }
 
-  const chaves = [];
+  document.getElementById("periodoMensal").textContent =
+    `Ciclo ${nomeMes(mesInicial)} a ${nomeMes(mesAtual)} de ${anoAtual}`;
 
-  for (let mes = mesInicial; mes <= mesAtual; mes++) {
-    chaves.push(
-      anoAtual + "-" + String(mes + 1).padStart(2, "0")
-    );
-  }
+  const maximo = Math.max(1, ...meses.map(d => d.liquido));
 
-  const tabela = document.getElementById("tabelaMensal");
-
-  tabela.innerHTML = chaves.map(m => {
-    const d = meses[m] || {
-      bruto: 0,
-      liquido: 0,
-      descontos: 0,
-      comissao: 0,
-      atendimentos: 0
-    };
-
-    
-return `
-  <tr>
-    <td>${nomeMes(m)}</td>
-    <td>${d.atendimentos}</td>
-    <td>${dinheiro(d.bruto)}</td>
-    <td>${dinheiro(d.liquido)}</td>
-    <td>${dinheiro(d.comissao)}</td>
-  </tr>
-`;
-
-  }).join("");
-
-  const grafico = document.getElementById("graficoMensal");
-
-  const maior = Math.max(
-    1,
-    ...chaves.flatMap(m => [
-      meses[m]?.bruto || 0,
-      meses[m]?.liquido || 0
-    ])
-  );
-
-  grafico.innerHTML = chaves.map(m => {
-    const d = meses[m] || {
-      bruto: 0,
-      liquido: 0
-    };
-
-    const larguraBruto = d.bruto / maior * 100;
-    const larguraLiquido = d.liquido / maior * 100;
+  document.getElementById("graficoMensal").innerHTML = meses.map(d => {
+    const altura = (d.liquido / maximo) * 100;
 
     return `
-      <div class="grafico-mes">
-        <div class="mes-titulo">${nomeMes(m)}</div>
-
-        <div class="linha-grafico">
-          <span>Bruto</span>
-          <div class="barra-fundo">
-            <div class="barra" style="width:${larguraBruto}%"></div>
-          </div>
-          <div class="valor-grafico">${dinheiro(d.bruto)}</div>
+      <div class="month-column">
+        <div class="bar-area">
+          <div class="bar net" style="height:${altura}%"
+            title="${dinheiro(d.liquido)}"></div>
         </div>
+        <small>${nomeMes(d.mes)}</small>
+      </div>
+    `;
+  }).join("");
 
-        <div class="linha-grafico">
-          <span>Líquido</span>
-          <div class="barra-fundo">
-            <div class="barra liquida" style="width:${larguraLiquido}%"></div>
-          </div>
-          <div class="valor-grafico">${dinheiro(d.liquido)}</div>
+  document.getElementById("tabelaMensal").innerHTML = meses.map(d => `
+    <tr>
+      <td>${nomeMes(d.mes)}</td>
+      <td>${d.atendimentos}</td>
+      <td>${dinheiro(d.bruto)}</td>
+      <td>${dinheiro(d.liquido)}</td>
+      <td class="highlight">${dinheiro(d.comissao)}</td>
+    </tr>
+  `).join("");
+}
+
+function atualizarHistorico() {
+  const lista = [...registros].sort((a, b) => {
+    return b.data.localeCompare(a.data) || b.id - a.id;
+  });
+
+  const elemento = document.getElementById("historico");
+
+  if (lista.length === 0) {
+    elemento.innerHTML = '<div class="empty">Nenhum atendimento cadastrado.</div>';
+    return;
+  }
+
+  elemento.innerHTML = lista.map(r => {
+    const servico = r.servico === "ambos"
+      ? "Cabelo + Barba"
+      : r.servico === "barba" ? "Barba" : "Cabelo";
+
+    const dataFormatada = new Date(r.data + "T12:00:00")
+      .toLocaleDateString("pt-BR");
+
+    return `
+      <div class="history-item">
+        <div class="history-info">
+          <strong>${servico}</strong>
+          <small>${dataFormatada} • Bruto: ${dinheiro(valorBruto(r))}</small>
+          <small>Desconto: ${dinheiro(r.desconto)}</small>
+        </div>
+        <div class="history-right">
+          <strong>${dinheiro(valorComissao(r))}</strong>
+          <small>Minha comissão</small>
+          <button class="delete" onclick="excluir(${r.id})">EXCLUIR</button>
         </div>
       </div>
     `;
   }).join("");
 }
 
-
 function excluir(id) {
-  if (!confirm("Deseja excluir este atendimento?")) {
-    return;
-  }
+  if (!confirm("Deseja realmente excluir este atendimento?")) return;
 
   const anteriores = registros.slice();
-
-  registros = registros.filter(r => Number(r.id) !== id);
+  registros = registros.filter(r => r.id !== id);
 
   try {
     localStorage.setItem(chave, JSON.stringify(registros));
     atualizar();
-  } catch(e) {
+  } catch (e) {
     registros = anteriores;
-    alert("Não foi possível excluir. Tente novamente.");
+    alert("Não foi possível excluir o atendimento.");
   }
 }
 
+document.getElementById("data").value = dataLocal(new Date());
+mostrarCampos();
 atualizar();
 </script>
 
