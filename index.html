@@ -666,16 +666,17 @@ function atualizarEvolucaoMensal() {
       atendimentos: 0
     };
 
-    return `
-      <tr>
-        <td>${nomeMes(m)}</td>
-        <td>${dinheiro(d.bruto)}</td>
-        <td>${dinheiro(d.descontos)}</td>
-        <td>${dinheiro(d.liquido)}</td>
-        <td>${dinheiro(d.comissao)}</td>
-        <td>${d.atendimentos}</td>
-      </tr>
-    `;
+    
+return `
+  <tr>
+    <td>${nomeMes(m)}</td>
+    <td>${d.atendimentos}</td>
+    <td>${dinheiro(d.bruto)}</td>
+    <td>${dinheiro(d.liquido)}</td>
+    <td>${dinheiro(d.comissao)}</td>
+  </tr>
+`;
+
   }).join("");
 
   const grafico = document.getElementById("graficoMensal");
