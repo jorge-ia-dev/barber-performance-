@@ -199,13 +199,13 @@ function dinheiro(valor) {
   });
 }
 
+
 function salvar() {
   const data = document.getElementById("data").value;
   const servico = document.getElementById("servico").value;
 
-  let cabelo = Number(document.getElementById("cabelo").value) || 0;
-  let barba = Number(document.getElementById("barba").value) || 0;
-
+  const valorCabelo = Number(document.getElementById("cabelo").value) || 0;
+  const valorBarba = Number(document.getElementById("barba").value) || 0;
   const desconto = Number(document.getElementById("desconto").value) || 0;
 
   if (!data) {
@@ -213,8 +213,20 @@ function salvar() {
     return;
   }
 
-  if (servico === "cabelo") barba = 0;
-  if (servico === "barba") cabelo = 0;
+  let cabelo = 0;
+  let barba = 0;
+
+  if (servico === "cabelo") {
+    cabelo = valorCabelo;
+  } else if (servico === "barba") {
+    barba = valorBarba;
+  } else if (servico === "ambos") {
+    cabelo = valorCabelo;
+    barba = valorBarba;
+  } else {
+    alert("Selecione um serviço válido.");
+    return;
+  }
 
   const bruto = cabelo + barba;
 
@@ -224,19 +236,21 @@ function salvar() {
   }
 
   const liquido = bruto - desconto;
+  const comissao = liquido * 0.5;
 
-  registros.push({
+  const atendimento = {
     id: Date.now(),
-    data,
-    servico,
-    cabelo,
-    barba,
-    desconto,
-    liquido,
-    comissao: liquido * 0.5
-  });
+    data: data,
+    servico: servico,
+    cabelo: cabelo,
+    barba: barba,
+    desconto: desconto,
+    liquido: liquido,
+    comissao: comissao
+  };
 
   try {
+    registros.push(atendimento);
     localStorage.setItem(chave, JSON.stringify(registros));
 
     document.getElementById("mensagem").textContent =
@@ -246,10 +260,13 @@ function salvar() {
 
     atualizar();
 
-  } catch(e) {
-    alert("Não foi possível salvar. Verifique o armazenamento do navegador.");
+  } catch (e) {
+    registros.pop();
+    alert("Erro ao salvar. Verifique o armazenamento do navegador.");
   }
 }
+
+
 
 function atualizar() {
   const dias = Number(document.getElementById("periodo").value);
