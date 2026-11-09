@@ -590,18 +590,38 @@ function atualizarGraficoSemanal() {
   }).join("");
 }
 
+
 function atualizarEvolucaoMensal() {
+  const hoje = new Date();
+  const anoAtual = hoje.getFullYear();
+  const mesAtual = hoje.getMonth();
+
+  // Outubro inicia o ciclo de acompanhamento.
+  // Em janeiro, um novo ciclo começa automaticamente.
+  const mesInicial = mesAtual >= 9 ? 9 : 0;
+
   const meses = {};
 
   registros.forEach(r => {
     if (!r.data) return;
 
-    const mes = r.data.slice(0, 7);
+    const partes = r.data.split("-").map(Number);
+    const ano = partes[0];
+    const mes = partes[1] - 1;
+
+    // Exibe somente o ano atual e o período do ciclo.
+    if (
+      ano !== anoAtual ||
+      mes < mesInicial ||
+      mes > mesAtual
+    ) return;
+
+    const chaveMes = r.data.slice(0, 7);
     const bruto = valorBruto(r);
     const liquido = valorLiquido(r);
 
-    if (!meses[mes]) {
-      meses[mes] = {
+    if (!meses[chaveMes]) {
+      meses[chaveMes] = {
         bruto: 0,
         liquido: 0,
         descontos: 0,
@@ -610,11 +630,11 @@ function atualizarEvolucaoMensal() {
       };
     }
 
-    meses[mes].bruto += bruto;
-    meses[mes].liquido += liquido;
-    meses[mes].descontos += Number(r.desconto || 0);
-    meses[mes].comissao += liquido * 0.5;
-    meses[mes].atendimentos++;
+    meses[chaveMes].bruto += bruto;
+    meses[chaveMes].liquido += liquido;
+    meses[chaveMes].descontos += Number(r.desconto || 0);
+    meses[chaveMes].comissao += liquido * 0.5;
+    meses[chaveMes].atendimentos++;
   });
 
   function nomeMes(chave) {
@@ -622,62 +642,60 @@ function atualizarEvolucaoMensal() {
 
     return new Date(ano, mes - 1, 1)
       .toLocaleDateString("pt-BR", {
-        month: "short",
+        month: "long",
         year: "numeric"
       });
   }
 
-  const chaves = Object.keys(meses).sort().reverse();
+  const chaves = [];
+
+  for (let mes = mesInicial; mes <= mesAtual; mes++) {
+    chaves.push(
+      anoAtual + "-" + String(mes + 1).padStart(2, "0")
+    );
+  }
+
   const tabela = document.getElementById("tabelaMensal");
 
-  tabela.innerHTML = chaves.length
-    ? chaves.map(m => `
-        <tr>
-          <td>${nomeMes(m)}</td>
-          <td>${dinheiro(meses[m].bruto)}</td>
-          <td>${dinheiro(meses[m].descontos)}</td>
-          <td>${dinheiro(meses[m].liquido)}</td>
-          <td>${dinheiro(meses[m].comissao)}</td>
-          <td>${meses[m].atendimentos}</td>
-        </tr>
-      `).join("")
-    : '<tr><td colspan="6">Nenhum dado registrado.</td></tr>';
+  tabela.innerHTML = chaves.map(m => {
+    const d = meses[m] || {
+      bruto: 0,
+      liquido: 0,
+      descontos: 0,
+      comissao: 0,
+      atendimentos: 0
+    };
 
-  const ultimosMeses = [];
-  const hoje = new Date();
-
-  for (let i = 5; i >= 0; i--) {
-    const d = new Date(
-      hoje.getFullYear(),
-      hoje.getMonth() - i,
-      1
-    );
-
-    const chave =
-      d.getFullYear() + "-" +
-      String(d.getMonth() + 1).padStart(2, "0");
-
-    ultimosMeses.push(chave);
-  }
+    return `
+      <tr>
+        <td>${nomeMes(m)}</td>
+        <td>${dinheiro(d.bruto)}</td>
+        <td>${dinheiro(d.descontos)}</td>
+        <td>${dinheiro(d.liquido)}</td>
+        <td>${dinheiro(d.comissao)}</td>
+        <td>${d.atendimentos}</td>
+      </tr>
+    `;
+  }).join("");
 
   const grafico = document.getElementById("graficoMensal");
 
   const maior = Math.max(
     1,
-    ...ultimosMeses.flatMap(m => [
+    ...chaves.flatMap(m => [
       meses[m]?.bruto || 0,
       meses[m]?.liquido || 0
     ])
   );
 
-  grafico.innerHTML = ultimosMeses.map(m => {
-    const dados = meses[m] || {
+  grafico.innerHTML = chaves.map(m => {
+    const d = meses[m] || {
       bruto: 0,
       liquido: 0
     };
 
-    const larguraBruto = dados.bruto / maior * 100;
-    const larguraLiquido = dados.liquido / maior * 100;
+    const larguraBruto = d.bruto / maior * 100;
+    const larguraLiquido = d.liquido / maior * 100;
 
     return `
       <div class="grafico-mes">
@@ -688,7 +706,7 @@ function atualizarEvolucaoMensal() {
           <div class="barra-fundo">
             <div class="barra" style="width:${larguraBruto}%"></div>
           </div>
-          <div class="valor-grafico">${dinheiro(dados.bruto)}</div>
+          <div class="valor-grafico">${dinheiro(d.bruto)}</div>
         </div>
 
         <div class="linha-grafico">
@@ -696,12 +714,13 @@ function atualizarEvolucaoMensal() {
           <div class="barra-fundo">
             <div class="barra liquida" style="width:${larguraLiquido}%"></div>
           </div>
-          <div class="valor-grafico">${dinheiro(dados.liquido)}</div>
+          <div class="valor-grafico">${dinheiro(d.liquido)}</div>
         </div>
       </div>
     `;
   }).join("");
 }
+
 
 function excluir(id) {
   if (!confirm("Deseja excluir este atendimento?")) {
