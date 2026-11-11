@@ -291,7 +291,7 @@ button:active {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 470px;
+  min-width: 200px;
   font-size: 14px;
 }
 
@@ -372,11 +372,16 @@ td {
   margin-top: 12px;
 }
 
-/* PRIVACIDADE */
+/* PRIVACIDADE SELETIVA */
+
 .valor-oculto {
   filter: blur(8px);
   user-select: none;
   pointer-events: none;
+}
+
+.coluna-financeira {
+  transition: opacity .2s ease;
 }
 
 @media (min-width: 650px) {
@@ -493,9 +498,9 @@ td {
         <tr>
           <th>Mês</th>
           <th>Atendimentos</th>
-          <th>Bruto</th>
-          <th>Líquido</th>
-          <th>Comissão</th>
+          <th class="coluna-financeira">Bruto</th>
+          <th class="coluna-financeira">Líquido</th>
+          <th class="coluna-financeira">Comissão</th>
         </tr>
       </thead>
       <tbody id="tabelaMensal"></tbody>
@@ -677,7 +682,6 @@ function atualizar() {
   atualizarEvolucaoMensal();
   atualizarHistorico();
 
-  // Mantém o modo de privacidade ativo mesmo após atualizar os dados.
   aplicarPrivacidade();
 }
 
@@ -776,9 +780,9 @@ function atualizarEvolucaoMensal() {
     <tr>
       <td>${nomeMes(d.mes)}</td>
       <td>${d.atendimentos}</td>
-      <td>${dinheiro(d.bruto)}</td>
-      <td>${dinheiro(d.liquido)}</td>
-      <td class="highlight">${dinheiro(d.comissao)}</td>
+      <td class="coluna-financeira">${dinheiro(d.bruto)}</td>
+      <td class="coluna-financeira">${dinheiro(d.liquido)}</td>
+      <td class="coluna-financeira highlight">${dinheiro(d.comissao)}</td>
     </tr>
   `).join("");
 }
@@ -807,11 +811,11 @@ function atualizarHistorico() {
       <div class="history-item">
         <div class="history-info">
           <strong>${servico}</strong>
-          <small>${dataFormatada} • Bruto: ${dinheiro(valorBruto(r))}</small>
-          <small>Desconto: ${dinheiro(r.desconto)}</small>
+          <small>${dataFormatada} • Bruto: <span class="valor-historico">${dinheiro(valorBruto(r))}</span></small>
+          <small>Desconto: <span class="valor-historico">${dinheiro(r.desconto)}</span></small>
         </div>
         <div class="history-right">
-          <strong>${dinheiro(valorComissao(r))}</strong>
+          <strong class="valor-historico">${dinheiro(valorComissao(r))}</strong>
           <small>Minha comissão</small>
           <button class="delete" onclick="excluir(${r.id})">EXCLUIR</button>
         </div>
@@ -835,27 +839,27 @@ function excluir(id) {
   }
 }
 
-/* CONTROLE DE PRIVACIDADE */
+/* CONTROLE DE PRIVACIDADE SELETIVA */
 
 function aplicarPrivacidade() {
-  const elementos = [
-    "totalBruto",
-    "totalLiquido",
-    "totalComissao",
-    "graficoSemanal",
-    "graficoMensal",
-    "tabelaMensal",
-    "historico"
-  ];
+  const botao = document.getElementById("botaoPrivacidade");
 
-  elementos.forEach(id => {
+  // No desempenho, deixa somente a quantidade de atendimentos.
+  ["totalBruto", "totalLiquido", "totalComissao"].forEach(id => {
     const elemento = document.getElementById(id);
-    if (elemento) {
-      elemento.classList.toggle("valor-oculto", privacidadeAtiva);
-    }
+    elemento.parentElement.style.display =
+      privacidadeAtiva ? "none" : "";
   });
 
-  const botao = document.getElementById("botaoPrivacidade");
+  // Nos resultados mensais, esconde somente as colunas financeiras.
+  document.querySelectorAll(".coluna-financeira").forEach(elemento => {
+    elemento.style.display = privacidadeAtiva ? "none" : "";
+  });
+
+  // No histórico, esconde somente os valores em dinheiro.
+  document.querySelectorAll(".valor-historico").forEach(elemento => {
+    elemento.classList.toggle("valor-oculto", privacidadeAtiva);
+  });
 
   botao.textContent = privacidadeAtiva
     ? "🔒 MOSTRAR VALORES"
