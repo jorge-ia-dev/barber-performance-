@@ -65,6 +65,10 @@ header {
   letter-spacing: 1px;
 }
 
+.privacy-button {
+  margin-top: 16px;
+}
+
 h2 {
   font-family: 'Orbitron', sans-serif;
   font-size: 15px;
@@ -368,6 +372,13 @@ td {
   margin-top: 12px;
 }
 
+/* PRIVACIDADE */
+.valor-oculto {
+  filter: blur(8px);
+  user-select: none;
+  pointer-events: none;
+}
+
 @media (min-width: 650px) {
   .grid {
     grid-template-columns: repeat(4, 1fr);
@@ -386,6 +397,13 @@ td {
 <header>
   <div class="logo">BARBER <span>PERFORMANCE</span></div>
   <div class="subtitle">GESTÃO • RESULTADOS • EVOLUÇÃO</div>
+
+  <button
+    id="botaoPrivacidade"
+    class="secondary privacy-button"
+    onclick="alternarPrivacidade()">
+    👁 OCULTAR VALORES
+  </button>
 </header>
 
 <section>
@@ -498,6 +516,7 @@ const chave = "barber_performance_v1";
 
 let registros = [];
 let periodo = 7;
+let privacidadeAtiva = false;
 
 try {
   registros = JSON.parse(localStorage.getItem(chave) || "[]");
@@ -657,6 +676,9 @@ function atualizar() {
   atualizarGraficoSemanal();
   atualizarEvolucaoMensal();
   atualizarHistorico();
+
+  // Mantém o modo de privacidade ativo mesmo após atualizar os dados.
+  aplicarPrivacidade();
 }
 
 function atualizarGraficoSemanal() {
@@ -712,8 +734,6 @@ function atualizarEvolucaoMensal() {
   const anoAtual = hoje.getFullYear();
   const mesAtual = hoje.getMonth();
 
-  // De outubro a dezembro: inicia em outubro.
-  // A partir de janeiro: inicia um novo ciclo em janeiro.
   const mesInicial = mesAtual >= 9 ? 9 : 0;
 
   const meses = [];
@@ -813,6 +833,38 @@ function excluir(id) {
     registros = anteriores;
     alert("Não foi possível excluir o atendimento.");
   }
+}
+
+/* CONTROLE DE PRIVACIDADE */
+
+function aplicarPrivacidade() {
+  const elementos = [
+    "totalBruto",
+    "totalLiquido",
+    "totalComissao",
+    "graficoSemanal",
+    "graficoMensal",
+    "tabelaMensal",
+    "historico"
+  ];
+
+  elementos.forEach(id => {
+    const elemento = document.getElementById(id);
+    if (elemento) {
+      elemento.classList.toggle("valor-oculto", privacidadeAtiva);
+    }
+  });
+
+  const botao = document.getElementById("botaoPrivacidade");
+
+  botao.textContent = privacidadeAtiva
+    ? "🔒 MOSTRAR VALORES"
+    : "👁 OCULTAR VALORES";
+}
+
+function alternarPrivacidade() {
+  privacidadeAtiva = !privacidadeAtiva;
+  aplicarPrivacidade();
 }
 
 document.getElementById("data").value = dataLocal(new Date());
