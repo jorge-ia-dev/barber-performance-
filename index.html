@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090b0a">
+<meta name="theme-color" content="#101112">
 <title>Barber Performance</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,19 +13,19 @@
 
 <style>
 :root {
-  --bg: #090b0a;
-  --panel: #111512;
-  --panel2: #171d19;
-  --green: #a5ff75;
-  --text: #f2f5f1;
-  --muted: #89948c;
-  --border: #263129;
+  --bg: #101112;
+  --panel: #191a1c;
+  --panel2: #222326;
+  --gold: #c99a48;
+  --champagne: #f0d7a0;
+  --positive: #a5ff75;
+  --text: #f2f2f2;
+  --muted: #929398;
+  --border: #343438;
   --red: #ff7373;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -36,10 +36,7 @@ body {
   font-size: 17px;
 }
 
-.container {
-  max-width: 950px;
-  margin: auto;
-}
+.container { max-width: 950px; margin: auto; }
 
 header {
   padding: 20px 4px 25px;
@@ -49,31 +46,36 @@ header {
 
 .logo {
   font-family: 'Orbitron', sans-serif;
-  font-size: 23px;
+  font-size: 27px;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
+  color: var(--champagne);
 }
 
 .logo span {
-  color: var(--green);
+  display: block;
+  color: var(--gold);
+  font-size: 11px;
+  letter-spacing: 7px;
+  margin-top: 7px;
+  font-weight: 600;
 }
 
 .subtitle {
   color: var(--muted);
-  margin-top: 7px;
-  font-size: 15px;
-  letter-spacing: 1px;
+  margin-top: 13px;
+  font-size: 14px;
+  letter-spacing: 2px;
 }
 
-.privacy-button {
-  margin-top: 16px;
-}
+.privacy-button { margin-top: 16px; }
 
 h2 {
   font-family: 'Orbitron', sans-serif;
-  font-size: 15px;
-  letter-spacing: 1px;
+  font-size: 14px;
+  letter-spacing: 1.5px;
   margin: 0 0 18px;
+  color: var(--champagne);
 }
 
 section {
@@ -96,37 +98,36 @@ input, select {
   padding: 13px;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: #090d0a;
+  background: #111214;
   color: var(--text);
   font-family: 'Rajdhani', sans-serif;
   font-size: 17px;
   outline: none;
 }
 
-input:focus, select:focus {
-  border-color: var(--green);
-}
+input:focus, select:focus { border-color: var(--gold); }
 
 button {
   border: none;
   border-radius: 8px;
   padding: 13px 17px;
-  background: var(--green);
-  color: #10170d;
+  background: var(--gold);
+  color: #17130c;
   font-family: 'Orbitron', sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   cursor: pointer;
 }
 
-button:active {
-  transform: scale(.98);
+button:active { transform: scale(.98); }
+
+button:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+  transform: none;
 }
 
-.primary {
-  width: 100%;
-  margin-top: 18px;
-}
+.primary { width: 100%; margin-top: 18px; }
 
 .secondary {
   background: var(--panel2);
@@ -165,14 +166,12 @@ button:active {
 .metric strong {
   display: block;
   font-family: 'Orbitron', sans-serif;
-  font-size: 17px;
-  color: var(--green);
+  font-size: 16px;
+  color: var(--gold);
   overflow-wrap: anywhere;
 }
 
-.metric .neutral {
-  color: var(--text);
-}
+.metric .neutral { color: var(--text); }
 
 .controls {
   display: flex;
@@ -181,14 +180,92 @@ button:active {
   margin-bottom: 15px;
 }
 
-.controls button {
-  flex: 1;
-  min-width: 65px;
-}
+.controls button { flex: 1; min-width: 65px; }
 
 .controls button.active {
-  background: var(--green);
-  color: #10170d;
+  background: var(--gold);
+  color: #17130c;
+}
+
+.week-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.week-navigation button {
+  padding: 11px 13px;
+  min-width: 44px;
+}
+
+.week-period {
+  text-align: center;
+  flex: 1;
+}
+
+.week-period strong {
+  display: block;
+  color: var(--champagne);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+}
+
+.week-period small {
+  display: block;
+  color: var(--muted);
+  margin-top: 5px;
+}
+
+.week-extra {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px;
+  margin: 14px 0;
+  background: var(--panel2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.week-extra input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold);
+  flex-shrink: 0;
+}
+
+.week-extra label {
+  margin: 0;
+  color: var(--text);
+  font-size: 15px;
+}
+
+.week-note {
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.week-total {
+  margin-top: 13px;
+  padding: 15px;
+  border: 1px solid #6d542f;
+  border-radius: 10px;
+  background: #272117;
+}
+
+.week-total small {
+  color: var(--champagne);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.week-total strong {
+  color: var(--gold);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 21px;
 }
 
 .chart {
@@ -220,13 +297,8 @@ button:active {
   border-radius: 5px 5px 0 0;
 }
 
-.bar.gross {
-  background: #526b50;
-}
-
-.bar.net {
-  background: var(--green);
-}
+.bar.gross { background: #82663a; }
+.bar.net { background: var(--gold); }
 
 .bar-label {
   display: block;
@@ -268,13 +340,8 @@ button:active {
   text-align: center;
 }
 
-.month-column .bar-area {
-  height: 110px;
-}
-
-.month-column .bar {
-  width: 65%;
-}
+.month-column .bar-area { height: 110px; }
+.month-column .bar { width: 65%; }
 
 .month-column small {
   display: block;
@@ -283,10 +350,7 @@ button:active {
   margin-top: 7px;
 }
 
-.table-wrap {
-  width: 100%;
-  overflow-x: auto;
-}
+.table-wrap { width: 100%; overflow-x: auto; }
 
 table {
   width: 100%;
@@ -302,17 +366,11 @@ th, td {
   white-space: nowrap;
 }
 
-th {
-  color: var(--muted);
-  font-weight: 600;
-}
-
-td {
-  color: var(--text);
-}
+th { color: var(--muted); font-weight: 600; }
+td { color: var(--text); }
 
 .highlight {
-  color: var(--green);
+  color: var(--gold);
   font-weight: 700;
 }
 
@@ -325,17 +383,9 @@ td {
   border-bottom: 1px solid var(--border);
 }
 
-.history-item:last-child {
-  border-bottom: none;
-}
-
-.history-info {
-  min-width: 0;
-}
-
-.history-info strong {
-  display: block;
-}
+.history-item:last-child { border-bottom: none; }
+.history-info { min-width: 0; }
+.history-info strong { display: block; }
 
 .history-info small {
   color: var(--muted);
@@ -349,7 +399,7 @@ td {
 }
 
 .history-right strong {
-  color: var(--green);
+  color: var(--gold);
   display: block;
 }
 
@@ -360,7 +410,7 @@ td {
 }
 
 .message {
-  color: var(--green);
+  color: var(--positive);
   margin-top: 12px;
   text-align: center;
   font-weight: 700;
@@ -372,26 +422,17 @@ td {
   margin-top: 12px;
 }
 
-/* PRIVACIDADE SELETIVA */
-
 .valor-oculto {
   filter: blur(8px);
   user-select: none;
   pointer-events: none;
 }
 
-.coluna-financeira {
-  transition: opacity .2s ease;
-}
+.coluna-financeira { transition: opacity .2s ease; }
 
 @media (min-width: 650px) {
-  .grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  body {
-    padding-top: 35px;
-  }
+  .grid { grid-template-columns: repeat(4, 1fr); }
+  body { padding-top: 35px; }
 }
 </style>
 </head>
@@ -400,13 +441,10 @@ td {
 <div class="container">
 
 <header>
-  <div class="logo">BARBER <span>PERFORMANCE</span></div>
+  <div class="logo">BARBER<span>PERFORMANCE</span></div>
   <div class="subtitle">GESTÃO • RESULTADOS • EVOLUÇÃO</div>
 
-  <button
-    id="botaoPrivacidade"
-    class="secondary privacy-button"
-    onclick="alternarPrivacidade()">
+  <button id="botaoPrivacidade" class="secondary privacy-button" onclick="alternarPrivacidade()">
     👁 OCULTAR VALORES
   </button>
 </header>
@@ -473,11 +511,59 @@ td {
 </section>
 
 <section>
+  <h2>FECHAMENTO SEMANAL</h2>
+
+  <div class="week-navigation">
+    <button class="secondary" onclick="navegarSemana(-1)" aria-label="Semana anterior">❮</button>
+
+    <div class="week-period">
+      <strong id="semanaTitulo">SEMANA</strong>
+      <small id="semanaSubtitulo">Terça a sábado</small>
+    </div>
+
+    <button class="secondary" id="proximaSemana" onclick="navegarSemana(1)" aria-label="Próxima semana">❯</button>
+  </div>
+
+  <div class="week-extra">
+    <input type="checkbox" id="incluirSegunda" onchange="atualizarFechamentoSemanal()">
+    <label for="incluirSegunda">Incluir segunda-feira como dia extra</label>
+  </div>
+
+  <div class="grid">
+    <div class="metric">
+      <small>Atendimentos na semana</small>
+      <strong class="neutral" id="semanaAtendimentos">0</strong>
+    </div>
+    <div class="metric financeiro-semanal">
+      <small>Faturamento bruto</small>
+      <strong id="semanaBruto">R$ 0,00</strong>
+    </div>
+    <div class="metric financeiro-semanal">
+      <small>Faturamento líquido</small>
+      <strong id="semanaLiquido">R$ 0,00</strong>
+    </div>
+    <div class="metric financeiro-semanal">
+      <small>Minha comissão (50%)</small>
+      <strong id="semanaComissao">R$ 0,00</strong>
+    </div>
+  </div>
+
+  <div class="week-total financeiro-semanal">
+    <small>TOTAL DA MINHA COMISSÃO NA SEMANA</small>
+    <strong id="semanaTotal">R$ 0,00</strong>
+  </div>
+
+  <div class="week-note" id="semanaObservacao">
+    O fechamento considera os atendimentos de terça a sábado.
+  </div>
+</section>
+
+<section>
   <h2>EVOLUÇÃO SEMANAL</h2>
   <div class="chart" id="graficoSemanal"></div>
   <div class="legend">
-    <span><i class="dot" style="background:#526b50"></i>Bruto</span>
-    <span><i class="dot" style="background:#a5ff75"></i>Líquido</span>
+    <span><i class="dot" style="background:#82663a"></i>Bruto</span>
+    <span><i class="dot" style="background:#c99a48"></i>Líquido</span>
   </div>
 </section>
 
@@ -486,7 +572,7 @@ td {
   <div class="note" id="periodoMensal"></div>
   <div class="month-bars" id="graficoMensal"></div>
   <div class="legend">
-    <span><i class="dot" style="background:#a5ff75"></i>Faturamento líquido</span>
+    <span><i class="dot" style="background:#c99a48"></i>Faturamento líquido</span>
   </div>
 </section>
 
@@ -522,6 +608,7 @@ const chave = "barber_performance_v1";
 let registros = [];
 let periodo = 7;
 let privacidadeAtiva = false;
+let deslocamentoSemana = 0;
 
 try {
   registros = JSON.parse(localStorage.getItem(chave) || "[]");
@@ -544,6 +631,16 @@ function dataLocal(date) {
   return `${ano}-${mes}-${dia}`;
 }
 
+function formatarData(date) {
+  return date.toLocaleDateString("pt-BR");
+}
+
+function somarDias(data, quantidade) {
+  const resultado = new Date(data);
+  resultado.setDate(resultado.getDate() + quantidade);
+  return resultado;
+}
+
 function valorBruto(r) {
   return Number(r.cabelo || 0) + Number(r.barba || 0);
 }
@@ -564,11 +661,10 @@ function valorComissao(r) {
 
 function mostrarCampos() {
   const servico = document.getElementById("servico").value;
-  const cabelo = document.getElementById("campoCabelo");
-  const barba = document.getElementById("campoBarba");
-
-  cabelo.style.display = servico === "barba" ? "none" : "block";
-  barba.style.display = servico === "cabelo" ? "none" : "block";
+  document.getElementById("campoCabelo").style.display =
+    servico === "barba" ? "none" : "block";
+  document.getElementById("campoBarba").style.display =
+    servico === "cabelo" ? "none" : "block";
 }
 
 function salvar() {
@@ -655,6 +751,100 @@ function mudarPeriodo(dias) {
   atualizar();
 }
 
+/* FECHAMENTO SEMANAL
+   A semana começa na terça-feira.
+   O sábado encerra a semana padrão.
+   A segunda-feira seguinte pode ser incluída como dia extra.
+*/
+
+function inicioDaSemana(data) {
+  const d = new Date(data);
+  d.setHours(12, 0, 0, 0);
+
+  const dia = d.getDay();
+  let recuo;
+
+  if (dia === 0) {
+    recuo = 5;
+  } else if (dia === 1) {
+    recuo = 6;
+  } else {
+    recuo = dia - 2;
+  }
+
+  d.setDate(d.getDate() - recuo);
+  return d;
+}
+
+function obterInicioSemanaAtual() {
+  return inicioDaSemana(new Date());
+}
+
+function navegarSemana(direcao) {
+  deslocamentoSemana += direcao;
+
+  if (deslocamentoSemana > 0) {
+    deslocamentoSemana = 0;
+  }
+
+  atualizarFechamentoSemanal();
+}
+
+function atualizarFechamentoSemanal() {
+  const semanaAtual = obterInicioSemanaAtual();
+  const inicio = somarDias(semanaAtual, deslocamentoSemana * 7);
+  const sabado = somarDias(inicio, 4);
+  const segunda = somarDias(inicio, 6);
+
+  const incluirSegunda = document.getElementById("incluirSegunda").checked;
+
+  const registrosDaSemana = registros.filter(r => {
+    const dataRegistro = r.data;
+    const inicioTexto = dataLocal(inicio);
+    const sabadoTexto = dataLocal(sabado);
+    const segundaTexto = dataLocal(segunda);
+
+    const dentroDaSemana =
+      dataRegistro >= inicioTexto &&
+      dataRegistro <= sabadoTexto;
+
+    const segundaExtra =
+      incluirSegunda && dataRegistro === segundaTexto;
+
+    return dentroDaSemana || segundaExtra;
+  });
+
+  const bruto = registrosDaSemana.reduce((s, r) => s + valorBruto(r), 0);
+  const liquido = registrosDaSemana.reduce((s, r) => s + valorLiquido(r), 0);
+  const comissao = registrosDaSemana.reduce((s, r) => s + valorComissao(r), 0);
+
+  document.getElementById("semanaTitulo").textContent =
+    `${formatarData(inicio)} a ${formatarData(sabado)}`;
+
+  document.getElementById("semanaSubtitulo").textContent =
+    incluirSegunda
+      ? `Segunda extra: ${formatarData(segunda)}`
+      : "Terça a sábado";
+
+  document.getElementById("semanaAtendimentos").textContent =
+    registrosDaSemana.length;
+
+  document.getElementById("semanaBruto").textContent = dinheiro(bruto);
+  document.getElementById("semanaLiquido").textContent = dinheiro(liquido);
+  document.getElementById("semanaComissao").textContent = dinheiro(comissao);
+  document.getElementById("semanaTotal").textContent = dinheiro(comissao);
+
+  document.getElementById("semanaObservacao").textContent =
+    incluirSegunda
+      ? "Fechamento considerando terça a sábado e a segunda-feira extra selecionada."
+      : "Fechamento padrão considerando terça a sábado. A segunda-feira fica fora do cálculo.";
+
+  document.getElementById("proximaSemana").disabled =
+    deslocamentoSemana >= 0;
+
+  aplicarPrivacidade();
+}
+
 function atualizar() {
   const hoje = new Date();
   const inicio = new Date(hoje);
@@ -678,6 +868,7 @@ function atualizar() {
   document.getElementById("totalLiquido").textContent = dinheiro(liquido);
   document.getElementById("totalComissao").textContent = dinheiro(comissao);
 
+  atualizarFechamentoSemanal();
   atualizarGraficoSemanal();
   atualizarEvolucaoMensal();
   atualizarHistorico();
@@ -739,7 +930,6 @@ function atualizarEvolucaoMensal() {
   const mesAtual = hoje.getMonth();
 
   const mesInicial = mesAtual >= 9 ? 9 : 0;
-
   const meses = [];
 
   for (let m = mesInicial; m <= mesAtual; m++) {
@@ -839,26 +1029,27 @@ function excluir(id) {
   }
 }
 
-/* CONTROLE DE PRIVACIDADE SELETIVA */
+/* CONTROLE DE PRIVACIDADE */
 
 function aplicarPrivacidade() {
   const botao = document.getElementById("botaoPrivacidade");
 
-  // No desempenho, deixa somente a quantidade de atendimentos.
   ["totalBruto", "totalLiquido", "totalComissao"].forEach(id => {
     const elemento = document.getElementById(id);
     elemento.parentElement.style.display =
       privacidadeAtiva ? "none" : "";
   });
 
-  // Nos resultados mensais, esconde somente as colunas financeiras.
   document.querySelectorAll(".coluna-financeira").forEach(elemento => {
     elemento.style.display = privacidadeAtiva ? "none" : "";
   });
 
-  // No histórico, esconde somente os valores em dinheiro.
   document.querySelectorAll(".valor-historico").forEach(elemento => {
     elemento.classList.toggle("valor-oculto", privacidadeAtiva);
+  });
+
+  document.querySelectorAll(".financeiro-semanal").forEach(elemento => {
+    elemento.style.display = privacidadeAtiva ? "none" : "";
   });
 
   botao.textContent = privacidadeAtiva
