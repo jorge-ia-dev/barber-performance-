@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101112">
+<meta name="theme-color" content="#080D1B">
 <title>Barber Performance</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,16 +13,17 @@
 
 <style>
 :root {
-  --bg: #101112;
-  --panel: #191a1c;
-  --panel2: #222326;
-  --gold: #c99a48;
-  --champagne: #f0d7a0;
-  --positive: #a5ff75;
-  --text: #f2f2f2;
-  --muted: #929398;
-  --border: #343438;
-  --red: #ff7373;
+  --bg: #080D1B;
+  --panel: #10182B;
+  --panel2: #17233B;
+  --blue: #168BFF;
+  --blue-light: #55B0FF;
+  --blue-soft: #0B4F9E;
+  --text: #F2F5FF;
+  --muted: #91A2C0;
+  --border: #263B5E;
+  --red: #FF7373;
+  --positive: #55DCA0;
 }
 
 * { box-sizing: border-box; }
@@ -36,7 +37,10 @@ body {
   font-size: 17px;
 }
 
-.container { max-width: 950px; margin: auto; }
+.container {
+  max-width: 950px;
+  margin: auto;
+}
 
 header {
   padding: 20px 4px 25px;
@@ -49,16 +53,16 @@ header {
   font-size: 27px;
   font-weight: 800;
   letter-spacing: 3px;
-  color: var(--champagne);
+  color: var(--text);
 }
 
 .logo span {
   display: block;
-  color: var(--gold);
+  color: var(--blue);
   font-size: 11px;
   letter-spacing: 7px;
   margin-top: 7px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .subtitle {
@@ -75,7 +79,7 @@ h2 {
   font-size: 14px;
   letter-spacing: 1.5px;
   margin: 0 0 18px;
-  color: var(--champagne);
+  color: var(--blue-light);
 }
 
 section {
@@ -98,21 +102,24 @@ input, select {
   padding: 13px;
   border-radius: 8px;
   border: 1px solid var(--border);
-  background: #111214;
+  background: #0B1222;
   color: var(--text);
   font-family: 'Rajdhani', sans-serif;
   font-size: 17px;
   outline: none;
 }
 
-input:focus, select:focus { border-color: var(--gold); }
+input:focus, select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(22,139,255,.12);
+}
 
 button {
   border: none;
   border-radius: 8px;
   padding: 13px 17px;
-  background: var(--gold);
-  color: #17130c;
+  background: var(--blue);
+  color: #FFFFFF;
   font-family: 'Orbitron', sans-serif;
   font-size: 10px;
   font-weight: 700;
@@ -127,7 +134,10 @@ button:disabled {
   transform: none;
 }
 
-.primary { width: 100%; margin-top: 18px; }
+.primary {
+  width: 100%;
+  margin-top: 18px;
+}
 
 .secondary {
   background: var(--panel2);
@@ -137,7 +147,7 @@ button:disabled {
 
 .delete {
   background: #351919;
-  color: #ffaaaa;
+  color: #FFAAAA;
   padding: 8px 11px;
   font-size: 10px;
 }
@@ -167,7 +177,7 @@ button:disabled {
   display: block;
   font-family: 'Orbitron', sans-serif;
   font-size: 16px;
-  color: var(--gold);
+  color: var(--blue-light);
   overflow-wrap: anywhere;
 }
 
@@ -180,11 +190,15 @@ button:disabled {
   margin-bottom: 15px;
 }
 
-.controls button { flex: 1; min-width: 65px; }
+.controls button {
+  flex: 1;
+  min-width: 65px;
+}
 
 .controls button.active {
-  background: var(--gold);
-  color: #17130c;
+  background: var(--blue);
+  color: #FFFFFF;
+  border-color: var(--blue);
 }
 
 .week-navigation {
@@ -207,7 +221,7 @@ button:disabled {
 
 .week-period strong {
   display: block;
-  color: var(--champagne);
+  color: var(--blue-light);
   font-family: 'Orbitron', sans-serif;
   font-size: 12px;
 }
@@ -232,7 +246,7 @@ button:disabled {
 .week-extra input {
   width: 18px;
   height: 18px;
-  accent-color: var(--gold);
+  accent-color: var(--blue);
   flex-shrink: 0;
 }
 
@@ -251,19 +265,19 @@ button:disabled {
 .week-total {
   margin-top: 13px;
   padding: 15px;
-  border: 1px solid #6d542f;
+  border: 1px solid var(--blue-soft);
   border-radius: 10px;
-  background: #272117;
+  background: #0C1C36;
 }
 
 .week-total small {
-  color: var(--champagne);
+  color: var(--blue-light);
   display: block;
   margin-bottom: 6px;
 }
 
 .week-total strong {
-  color: var(--gold);
+  color: var(--blue);
   font-family: 'Orbitron', sans-serif;
   font-size: 21px;
 }
@@ -297,8 +311,8 @@ button:disabled {
   border-radius: 5px 5px 0 0;
 }
 
-.bar.gross { background: #82663a; }
-.bar.net { background: var(--gold); }
+.bar.gross { background: var(--blue-soft); }
+.bar.net { background: var(--blue); }
 
 .bar-label {
   display: block;
@@ -350,7 +364,10 @@ button:disabled {
   margin-top: 7px;
 }
 
-.table-wrap { width: 100%; overflow-x: auto; }
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
 
 table {
   width: 100%;
@@ -366,11 +383,15 @@ th, td {
   white-space: nowrap;
 }
 
-th { color: var(--muted); font-weight: 600; }
+th {
+  color: var(--muted);
+  font-weight: 600;
+}
+
 td { color: var(--text); }
 
 .highlight {
-  color: var(--gold);
+  color: var(--blue-light);
   font-weight: 700;
 }
 
@@ -384,6 +405,7 @@ td { color: var(--text); }
 }
 
 .history-item:last-child { border-bottom: none; }
+
 .history-info { min-width: 0; }
 .history-info strong { display: block; }
 
@@ -399,7 +421,7 @@ td { color: var(--text); }
 }
 
 .history-right strong {
-  color: var(--gold);
+  color: var(--blue-light);
   display: block;
 }
 
@@ -428,7 +450,9 @@ td { color: var(--text); }
   pointer-events: none;
 }
 
-.coluna-financeira { transition: opacity .2s ease; }
+.coluna-financeira {
+  transition: opacity .2s ease;
+}
 
 @media (min-width: 650px) {
   .grid { grid-template-columns: repeat(4, 1fr); }
@@ -562,8 +586,8 @@ td { color: var(--text); }
   <h2>EVOLUÇÃO SEMANAL</h2>
   <div class="chart" id="graficoSemanal"></div>
   <div class="legend">
-    <span><i class="dot" style="background:#82663a"></i>Bruto</span>
-    <span><i class="dot" style="background:#c99a48"></i>Líquido</span>
+    <span><i class="dot" style="background:#0B4F9E"></i>Bruto</span>
+    <span><i class="dot" style="background:#168BFF"></i>Líquido</span>
   </div>
 </section>
 
@@ -572,7 +596,7 @@ td { color: var(--text); }
   <div class="note" id="periodoMensal"></div>
   <div class="month-bars" id="graficoMensal"></div>
   <div class="legend">
-    <span><i class="dot" style="background:#c99a48"></i>Faturamento líquido</span>
+    <span><i class="dot" style="background:#168BFF"></i>Faturamento líquido</span>
   </div>
 </section>
 
@@ -751,11 +775,7 @@ function mudarPeriodo(dias) {
   atualizar();
 }
 
-/* FECHAMENTO SEMANAL
-   A semana começa na terça-feira.
-   O sábado encerra a semana padrão.
-   A segunda-feira seguinte pode ser incluída como dia extra.
-*/
+/* FECHAMENTO SEMANAL */
 
 function inicioDaSemana(data) {
   const d = new Date(data);
@@ -838,9 +858,6 @@ function atualizarFechamentoSemanal() {
     incluirSegunda
       ? "Fechamento considerando terça a sábado e a segunda-feira extra selecionada."
       : "Fechamento padrão considerando terça a sábado. A segunda-feira fica fora do cálculo.";
-
-  document.getElementById("proximaSemana").disabled =
-    deslocamentoSemana >= 0;
 
   aplicarPrivacidade();
 }
@@ -1029,7 +1046,7 @@ function excluir(id) {
   }
 }
 
-/* CONTROLE DE PRIVACIDADE */
+/* PRIVACIDADE */
 
 function aplicarPrivacidade() {
   const botao = document.getElementById("botaoPrivacidade");
